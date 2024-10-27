@@ -1,13 +1,7 @@
 /*
+    Lab 24: Goat 3K from Lab 23 implemented as a set
     OBJECTIVES
-    Task One: See Goat.h
-    Task Two: Write a GM3K1 engine that loops on this menu.
-        Write a main_menu() function that outputs this and then obtains, validates, and returns the user's choice.
-    Task Three: Write functions to add a goat to the trip, delete a goat from the trip, and display the current trip.
-        When you're adding a goat, randomly select a name and color from main()'s arrays and select a random age between 0 and MAX_AGE.
-        When you're asking the user to select a certain goat, display a submenu in this format (see assignment),
-            allowing the user to input an integer to reference the correct goat.
-    Task Four: Polish your output so it looks neatly laid out and flows intuitively.
+    Task One: implement Goat 3K as a set instead of a list
 */
 
 #include <iostream>
