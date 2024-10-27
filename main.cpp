@@ -7,22 +7,23 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
-#include <list>
+// #include <list>
+#include <set>
 #include "Goat.h"
 using namespace std;
 
 const int SZ_NAMES = 200, SZ_COLORS = 25, MAX_AGE = 20;
 
-int select_goat(list<Goat> trip);
-void delete_goat(list<Goat> &trip);
-void add_goat(list<Goat> &trip, string[], string[]);
-void display_trip(list<Goat> trip);
+int select_goat(set<Goat> trip);
+void delete_goat(set<Goat> &trip);
+void add_goat(set<Goat> &trip, string[], string[]);
+void display_trip(set<Goat> trip);
 int main_menu();                      // outputs prompt and collects user selection
 bool isValidOption(string, int, int); // helper function to validate user input
 
 int main()
 {
-    list<Goat> trip = {};
+    set<Goat> trip = {};
     srand(static_cast<unsigned int>(time(nullptr)));
     bool again;
     int userSelectedOption = 0; // represents user option chosen from menu
@@ -115,19 +116,19 @@ bool isValidOption(string userInput, int minOption, int maxOption)
 }
 
 // adds random goat to trip
-void add_goat(list<Goat> &trip, string names[], string colors[])
+void add_goat(set<Goat> &trip, string names[], string colors[])
 {
     string name = names[rand() % SZ_NAMES];
     int age = rand() % MAX_AGE + 1;
     string color = colors[rand() % SZ_COLORS];
 
-    trip.push_back(Goat(name, age, color));
+    trip.insert(Goat(name, age, color));
 
     cout << "Added to trip: " << name << " (" << age << ", " << color << ")" << "\n\n";
 }
 
 // directly outputs trip to console
-void display_trip(list<Goat> trip)
+void display_trip(set<Goat> trip)
 {
     if (trip.size() < 1)
     {
@@ -145,7 +146,7 @@ void display_trip(list<Goat> trip)
 }
 
 // lets user select a Goat to delete
-void delete_goat(list<Goat> &trip)
+void delete_goat(set<Goat> &trip)
 {
     // guard statement in case of empty list
     if (trip.size() < 1)
@@ -169,8 +170,8 @@ void delete_goat(list<Goat> &trip)
         if (isValidOption(userInput, 1, trip.size()))
         {
             advance(it, stoi(userInput) - 1); // -1 because index displayed to users starts at 1
-            trip.erase(it);
-            cout << "\n" << "Updated Trip After Deletion" << "\n";
+            cout << "\n" << "Updated Trip After Removing: " << it->get_name() << " (" << it->get_age() << ", " << it->get_color() << ")\n";
+            trip.erase(it);            
             display_trip(trip);
             break;
         }

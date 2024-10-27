@@ -37,6 +37,7 @@ public:
     string get_color() const        { return color; }
 
     // write overloaded < operator for the std::list
+    // necessary for set to compare objects
     bool operator<(const Goat &g) const   { return name < g.name; }
 };
 
